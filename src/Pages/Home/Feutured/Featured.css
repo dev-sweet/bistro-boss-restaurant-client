@@ -1,0 +1,8 @@
+.featured {
+  /* background-image: url("../../../assets//home//featured.jpg"); */
+  background-image: linear-gradient(#00000042, #000000ad),
+    url("/src/assets/home/featured.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
