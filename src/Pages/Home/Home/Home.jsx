@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import About from "../About/About";
 import Banner from "../Banner/Banner";
 import Categories from "../Categories/Categories";
@@ -10,6 +11,9 @@ import Testimonials from "../Testimonials/Testimonials";
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boss Restaurant | Home</title>
+      </Helmet>
       <Banner />
       <Categories />
       <About />

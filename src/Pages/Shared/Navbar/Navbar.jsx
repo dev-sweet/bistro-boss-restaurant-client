@@ -3,27 +3,27 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <Link className="color-yellow-100" href="/">
+        <Link className="color-yellow-100" to="/">
           Home
         </Link>
       </li>
       <li>
-        <Link className="color-yellow-100" href="/contact">
+        <Link className="color-yellow-100" to="/contact">
           Contact
         </Link>
       </li>
       <li>
-        <Link className="color-yellow-100" href="/dashboard">
+        <Link className="color-yellow-100" to="/dashboard">
           Dashboard
         </Link>
       </li>
       <li>
-        <Link className="color-yellow-100" href="/menu">
-          Menu
+        <Link className="color-yellow-100" to="/menu">
+          Our Menu
         </Link>
       </li>
       <li>
-        <Link className="color-yellow-100" href="/shop">
+        <Link className="color-yellow-100" to="/shop">
           Our Shop
         </Link>
       </li>
