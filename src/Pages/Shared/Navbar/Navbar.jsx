@@ -23,7 +23,7 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link className="color-yellow-100" to="/shop">
+        <Link className="color-yellow-100" to="/orders/salads">
           Our Shop
         </Link>
       </li>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import Item from "./Item";
-
+import FoodCard from "../../Shared/FoodCard/FoodCard";
 const RecommendsItems = () => {
   const [items, setItems] = useState([]);
   useEffect(() => {
@@ -18,7 +17,7 @@ const RecommendsItems = () => {
       <SectionTitle title="Chef Recommends" subtitle="Should try" />
       <div className="md:grid md:grid-cols-3 gap-10">
         {items?.map((item) => (
-          <Item key={item._id} item={item} />
+          <FoodCard key={item._id} item={item} />
         ))}
       </div>
     </section>

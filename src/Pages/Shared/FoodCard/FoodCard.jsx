@@ -1,4 +1,4 @@
-const Item = ({ item }) => {
+const FoodCard = ({ item }) => {
   const { name, image, recipe } = item;
   return (
     <div className="px-5">
@@ -18,4 +18,4 @@ const Item = ({ item }) => {
   );
 };
 
-export default Item;
+export default FoodCard;

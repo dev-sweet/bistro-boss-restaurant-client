@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import MenuSingleItem from "./MenuSingleItem";
 import { useMenu } from "../../../hooks/useMenu";
+import { Link } from "react-router-dom";
 
 const MenuItems = () => {
   const [menu] = useMenu();
@@ -15,9 +16,12 @@ const MenuItems = () => {
         ))}
       </div>
       <div className="text-center mt-5">
-        <button className="btn btn-lg btn-outline border-0 border-b-2 uppercase">
+        <Link
+          to="/menu"
+          className="btn btn-lg btn-outline border-0 border-b-2 uppercase"
+        >
           View Full Menu
-        </button>
+        </Link>
       </div>
     </section>
   );

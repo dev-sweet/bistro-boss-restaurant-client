@@ -7,6 +7,7 @@ import desertImg from "../../assets/menu/dessert-bg.jpeg";
 import saladImg from "../../assets/menu/salad-bg.jpg";
 import pizzaImg from "../../assets/menu/pizza-bg.jpg";
 import soupImg from "../../assets/menu/soup-bg.jpg";
+import { Link } from "react-router-dom";
 const OurMenu = () => {
   const [menu] = useMenu();
   const offered = menu.filter((item) => item.category === "offered");
@@ -26,9 +27,12 @@ const OurMenu = () => {
         <SectionTitle title="today's offer" subtitle="Don't miss!" />
         <MenuCategory items={offered} />
         <div className="text-center mb-10">
-          <button className="btn btn-lg btn-outline border-0 border-b-2 uppercase">
+          <Link
+            to="/orders"
+            className="btn btn-lg btn-outline border-0 border-b-2 uppercase"
+          >
             Order Your favorite food
-          </button>
+          </Link>
         </div>
       </section>
       <MenuCategory
