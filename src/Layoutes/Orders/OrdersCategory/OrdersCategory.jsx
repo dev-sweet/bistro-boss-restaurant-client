@@ -2,42 +2,53 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useMenu } from "../../../hooks/useMenu";
 import OrdersTab from "../OrdersTab/OrdersTab";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+// import required modules
+import { Pagination } from "swiper/modules";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
 const OrdersCategory = () => {
-  const [tabIndex, setTabIndex] = useState(0);
-  const [menu] = useMenu();
-  const desserts = menu.filter((item) => item.category === "dessert");
-  const salads = menu.filter((item) => item.category === "salad");
-  const pizzas = menu.filter((item) => item.category === "pizza");
-  const soups = menu.filter((item) => item.category === "soup");
-  const drinks = menu.filter((item) => item.category === "drinks");
+  const [items, setItems] = useState([]);
+  const categories = ["salads", "pizza", "soups", "desserts", "drinks"];
+  const { category } = useParams();
+  const initialIndex = categories.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
+
+  console.log(category);
+  useEffect(() => {
+    fetch(`http://localhost:5000/menu?category=${category}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setItems(data);
+        console.log(data);
+      });
+  }, [category, tabIndex]);
+
   return (
     <div>
       <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-        <TabList>
-          <Tab>SALADS</Tab>
-          <Tab>PIZZA</Tab>
-          <Tab>SOUPS</Tab>
-          <Tab>DESSERTS</Tab>
-          <Tab>DRINKS</Tab>
-        </TabList>
-
-        <TabPanel>
-          <OrdersTab items={salads} />
-        </TabPanel>
-        <TabPanel>
-          <OrdersTab items={pizzas} />
-        </TabPanel>
-        <TabPanel>
-          <OrdersTab items={soups} />
-        </TabPanel>
-        <TabPanel>
-          <OrdersTab items={desserts} />
-        </TabPanel>
-        <TabPanel>
-          <OrdersTab items={drinks} />
-        </TabPanel>
+        <div className="text-center py-10">
+          <TabList>
+            {categories.map((category, index) => (
+              <Tab key={index}>
+                <Link
+                  className="uppercase font-semibold"
+                  to={`/orders/${category}`}
+                >
+                  {category}
+                </Link>
+              </Tab>
+            ))}
+          </TabList>
+        </div>
+        {categories.map((category, index) => (
+          <TabPanel key={index}>
+            <OrdersTab items={items} />
+          </TabPanel>
+        ))}
       </Tabs>
     </div>
   );

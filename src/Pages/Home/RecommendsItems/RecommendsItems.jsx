@@ -4,7 +4,7 @@ import FoodCard from "../../Shared/FoodCard/FoodCard";
 const RecommendsItems = () => {
   const [items, setItems] = useState([]);
   useEffect(() => {
-    fetch("./menu.json")
+    fetch("http://localhost:5000/menu")
       .then((res) => res.json())
       .then((data) => {
         const items = data.slice(0, 6);
