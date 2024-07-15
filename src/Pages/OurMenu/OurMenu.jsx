@@ -21,7 +21,7 @@ const OurMenu = () => {
         img={img}
         title="Our Menu"
         subtitle="would you like to try a dish"
-        mt={28}
+        mt="80"
       />
       <section>
         <SectionTitle title="today's offer" subtitle="Don't miss!" />

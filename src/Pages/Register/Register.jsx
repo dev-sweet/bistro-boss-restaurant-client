@@ -15,7 +15,7 @@ const Register = () => {
         }}
         className="hero min-h-screen"
       >
-        <div className="hero-content flex gap-16">
+        <div className="hero-content flex-row-reverse gap-16">
           <div className="text-center lg:text-left w-2/4">
             <img className="w-full" src={`${img}`} alt="" />
           </div>

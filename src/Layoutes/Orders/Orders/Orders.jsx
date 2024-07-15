@@ -9,7 +9,7 @@ const Orders = () => {
         img={coverImg}
         title="our shop"
         subtitle="Would you like to try a dish?"
-        mt={28}
+        mt="80"
       />
 
       <OrdersCategory />
