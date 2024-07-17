@@ -17,13 +17,14 @@ const OrdersCategory = () => {
   const initialIndex = categories.indexOf(category);
   const [tabIndex, setTabIndex] = useState(initialIndex);
 
-  console.log(category);
+  const salads = items.filter((item) => item.category === category);
+  console.log("salads", salads);
+  console.log("category", category, items[2].category);
   useEffect(() => {
-    fetch(`http://localhost:5000/menu?category=${category}`)
+    fetch(`http://localhost:5000/menu`)
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
-        console.log(data);
       });
   }, [category, tabIndex]);
 
@@ -44,11 +45,20 @@ const OrdersCategory = () => {
             ))}
           </TabList>
         </div>
-        {categories.map((category, index) => (
-          <TabPanel key={index}>
-            <OrdersTab items={items} />
-          </TabPanel>
-        ))}
+        {/* {categories.map((category, index) => ( */}
+        <TabPanel>
+          <OrdersTab items={items} />
+        </TabPanel>
+        <TabPanel>
+          <OrdersTab items={items} />
+        </TabPanel>
+        <TabPanel>
+          <OrdersTab items={items} />
+        </TabPanel>
+        <TabPanel>
+          <OrdersTab items={items} />
+        </TabPanel>
+        {/* ))} */}
       </Tabs>
     </div>
   );

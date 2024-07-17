@@ -10,7 +10,9 @@ const FoodCard = ({ item }) => {
           <h2 className="text-3xl text-center">{name}</h2>
           <p>{recipe}</p>
           <div className="text-center mt-4">
-            <button className="btn btn-primary">Add to cart</button>
+            <button className="btn bg-gray-200 text-[#BB8506] hover:bg-gray-800 mb-5">
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
