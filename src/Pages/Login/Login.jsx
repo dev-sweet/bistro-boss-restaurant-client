@@ -1,6 +1,6 @@
 import img from "../../assets/others/authentication2.png";
 import bg from "../../assets/others/authentication.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import {
   loadCaptchaEnginge,
@@ -15,6 +15,8 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
 
   const { loginUser, signInWithGoogle } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
   const handleValidateCaptcha = (e) => {
     const user_captcha_value = e.target.value;
 
@@ -28,14 +30,19 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     loginUser(email, password)
-      .then((data) => console.log(data))
+      .then((data) => {
+        if (data.user.email) {
+          Swal.fire("Login Success!");
+          navigate(location.state.from);
+        }
+      })
       .catch((err) => console.log(err));
   };
   const handleGoogleLogin = () => {
     signInWithGoogle().then((data) => {
-      console.log(data.user);
       if (data.user.email) {
         Swal.fire("Login Success!");
+        navigate(location.state.from);
       }
     });
   };

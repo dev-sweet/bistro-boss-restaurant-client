@@ -9,7 +9,6 @@ import "swiper/css/pagination";
 import { useEffect, useState } from "react";
 
 const OrdersTab = ({ items }) => {
-  console.log(items);
   // swiper pagination
   const pagination = {
     clickable: true,

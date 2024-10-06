@@ -1,13 +1,15 @@
 import img from "../../assets/others/authentication2.png";
 import bg from "../../assets/others/authentication.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createUser, signInWithGoogle } = useContext(AuthContext);
 
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -15,7 +17,8 @@ const Register = () => {
     const password = e.target.email.value;
 
     createUser(email, password).then((user) => {
-      console.log(user.user);
+      Swal.fire("Use created successfully!");
+      navigate("/");
     });
   };
 
