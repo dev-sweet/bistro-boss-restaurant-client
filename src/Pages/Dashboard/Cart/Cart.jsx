@@ -7,7 +7,7 @@ const Cart = () => {
   const [cart, refetch] = useCart();
   const axiosSecure = useAxiosSecure();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-
+  const totalPriceInFloat = totalPrice.toFixed(2);
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure you want to delete this cart item?",
@@ -40,7 +40,9 @@ const Cart = () => {
       <div className="bg-white  p-10">
         <div className="flex justify-between">
           <h3 className="text-3xl font-bold">Total Orders: {cart.length}</h3>
-          <h3 className="text-3xl font-bold">Total Prices: {totalPrice}</h3>
+          <h3 className="text-3xl font-bold">
+            Total Prices: {totalPriceInFloat}
+          </h3>
           <button className="bg-[#D1A054] text-white px-5 py-2 rounded">
             Pay
           </button>

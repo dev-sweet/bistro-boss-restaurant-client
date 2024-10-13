@@ -10,13 +10,16 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
 
   const { loginUser, signInWithGoogle } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
   const location = useLocation();
   const navigate = useNavigate();
+  const path = location?.state?.from || "/";
   const handleValidateCaptcha = (e) => {
     const user_captcha_value = e.target.value;
 
@@ -33,7 +36,7 @@ const Login = () => {
       .then((data) => {
         if (data.user.email) {
           Swal.fire("Login Success!");
-          navigate(location.state.from);
+          navigate(path);
         }
       })
       .catch((err) => console.log(err));
@@ -41,8 +44,15 @@ const Login = () => {
   const handleGoogleLogin = () => {
     signInWithGoogle().then((data) => {
       if (data.user.email) {
-        Swal.fire("Login Success!");
-        navigate(location.state.from);
+        axiosPublic
+          .post("/users", {
+            name: data.user.displayName,
+            email: data.user.email,
+          })
+          .then(() => {
+            Swal.fire("Login Success!");
+            navigate(path);
+          });
       }
     });
   };

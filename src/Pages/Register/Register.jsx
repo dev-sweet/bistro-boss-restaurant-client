@@ -5,25 +5,53 @@ import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
   const { createUser, signInWithGoogle } = useContext(AuthContext);
-
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.email.value;
 
-    createUser(email, password).then((user) => {
-      Swal.fire("Use created successfully!");
-      navigate("/");
+    createUser(email, password).then((res) => {
+      const loggedUser = res.user;
+
+      const userInfo = { name, email };
+      console.log(userInfo);
+      if (loggedUser.email) {
+        axiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire("Use created successfully!");
+            navigate("/");
+          }
+        });
+      }
     });
   };
 
   const hanldeGoogleLogin = () => {
-    signInWithGoogle().then((user) => console.log(user));
+    signInWithGoogle().then((data) => {
+      if (data.user.email) {
+        axiosPublic
+          .post("/users", {
+            name: data.user.displayName,
+            email: data.user.email,
+          })
+          .then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire("Register Success!");
+              navigate("/");
+            }
+            Swal.fire("Login Success!");
+            navigate("/");
+          });
+      }
+    });
   };
   return (
     <div>
